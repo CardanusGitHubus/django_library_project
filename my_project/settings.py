@@ -16,7 +16,7 @@ import psycopg2
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'p_library',  # Наше приложение библиотеки
+    'polls',  # test app from django docs tutorial
     # https://django-extensions.readthedocs.io/en/latest/ (to see SQL queries in the terminal)
     'django_extensions',
 ]

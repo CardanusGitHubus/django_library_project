@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'p_library',  # Наше приложение библиотеки
-    'polls',  # test app from django docs tutorial
     # https://django-extensions.readthedocs.io/en/latest/ (to see SQL queries in the terminal)
     'django_extensions',
 ]

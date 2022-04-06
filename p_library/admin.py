@@ -1,7 +1,7 @@
 from dataclasses import field
 from django.contrib import admin
 
-from .models import Author, Book, Publisher, Reader
+from .models import Author, Book, Publisher, Reader, Book_detail
 
 # Register your models here.
 # admin.site.register(Author)
@@ -54,5 +54,11 @@ class PublisherAdmin(admin.ModelAdmin):
 
 @admin.register(Reader)
 class ReaderAdmin(admin.ModelAdmin):
-    # list_display = ('name', 'get_books')
+    list_display = ('name', 'get_books')
+    pass
+
+
+@admin.register(Book_detail)
+class BookDetailAdmin(admin.ModelAdmin):
+    list_display = ('book', 'reader', 'copy_borrowed')
     pass

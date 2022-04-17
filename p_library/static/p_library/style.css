@@ -1,0 +1,8 @@
+input {
+    background-color: rgb(187, 187, 202);
+    margin: 5px;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}

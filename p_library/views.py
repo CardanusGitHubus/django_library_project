@@ -1,6 +1,3 @@
-from multiprocessing import context
-from re import I, template
-from sys import prefix
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
@@ -37,7 +34,7 @@ def index(request):
     template = loader.get_template('p_library/index.html')
     books = Book.objects.all()
     biblio_data = {
-        'title': 'мою библиотеку',
+        'title': 'мою библиотеку 🏛',
         'books': books,
     }
     return HttpResponse(template.render(biblio_data, request))

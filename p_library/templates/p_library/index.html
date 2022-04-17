@@ -1,46 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-</head>
-<body>
-    <h3>Добро пожаловать в {{ title }}.</h3>
-    <h3>Тут собрано {{ books|length }} книг из моей личной коллекции</h3>
+{% extends 'p_library/base.html' %}
 
-    <table border="1">
-        {% for book in books %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ book.title }}</td>
-            <td>{{ book.ISBN }}</td>
-            <td>{{ book.description }}</td>
-            <td>{{ book.year_release }}</td>
-            <td>{{ book.author.full_name }}</td>
-            <td>{{ book.author.country }}</td>
-            <td>{{ book.copy_count }}</td>
-            <td>
-                <form action="/index/book_increment/" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="hidden" name="id" value="{{ book.id }}" />
-                    <input type="submit" value="Увеличить кол-во" />
-                </form>
-                <form action="/index/book_decrement/" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="hidden" name="id" value="{{ book.id }}" />
-                    <input type="submit" value="Уменьшить кол-во" />
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    <br>
-        {% comment %}
-        {% endcomment %}
+{% load static %}
 
-        {% load custom_filters %}
-        {{ '100'|div_list:3 }}
-</body>
-</html>
+{% block index %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col">
+            <h3 class="text-center m-3">Добро пожаловать в {{ title }}</h3>
+            <h4 class="text-center m-3">Тут собрано {{ books|length }} книг из моей личной коллекции</h4>
+
+            <table class="table table-bordered" border="1">
+                <tr>
+                    <th></th>
+                    <th>Название</th>
+                    <th>ISBN</th>
+                    <th>Описание</th>
+                    <th>Год издания</th>
+                    <th>Автор</th>
+                    <th>Язык</th>
+                    <th>Кол-во экз.</th>
+                    <th></th>
+                </tr>
+                {% for book in books %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.ISBN }}</td>
+                    <td>{{ book.description }}</td>
+                    <td>{{ book.year_release }}</td>
+                    <td>{{ book.author.full_name }}</td>
+                    <td>{{ book.author.country }}</td>
+                    <td>{{ book.copy_count }}</td>
+                    <td>
+                        <form action="/index/book_increment/" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ book.id }}" />
+                            <input type="submit" value="Увеличить кол-во" />
+                        </form>
+                        <form action="/index/book_decrement/" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ book.id }}" />
+                            <input type="submit" value="Уменьшить кол-во" />
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <h4 class="text-center m-3 strikethrough">Это просто ненужный кастомный фильтр</h4>
+            <br>
+                {% comment %}
+                {% endcomment %}
+
+                {% load custom_filters %}
+                <p class="strikethrough">{{ '100'|div_list:3 }}</p>
+
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="{% static 'p_library/style.css' %}">
+
+{% endblock %}

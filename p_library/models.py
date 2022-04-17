@@ -1,4 +1,5 @@
 # from tkinter import CASCADE
+from operator import mod
 from django.db import models
 from django.core.validators import MaxValueValidator
 
@@ -41,6 +42,8 @@ class Book(models.Model):
                                related_name='book_author')
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE,
                                   related_name='book_publisher', null=True)
+    cover = models.ImageField(upload_to='book_covers',
+                              default='book_covers/default_book_cover.jpg')
     # readers = models.ManyToManyField(
     #     Reader, through='Book_detail', through_fields=('book', 'reader'), null=True)
 

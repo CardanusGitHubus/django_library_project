@@ -1,5 +1,7 @@
 from dataclasses import field
+import imp
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 
 from .models import Author, Book, Publisher, Reader, Book_detail
 
@@ -14,6 +16,10 @@ from .models import Author, Book, Publisher, Reader, Book_detail
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
+
+    list_display = ('title', 'author_full_name',
+                    'publisher_name', 'copy_count', 'get_cover')
+
     @staticmethod
     def author_full_name(obj):
         if obj.author is not None:
@@ -27,9 +33,11 @@ class BookAdmin(admin.ModelAdmin):
             return obj.publisher.name
         else:
             return "no publisher"
-    list_display = ('title', 'author_full_name',
-                    'publisher_name', 'copy_count')
     # exclude = ('copy_count',)
+
+    @staticmethod
+    def get_cover(obj):
+        return mark_safe(f'<img src={obj.cover.url} width="50" height="50">')
 
 
 @admin.register(Author)

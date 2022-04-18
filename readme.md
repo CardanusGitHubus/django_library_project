@@ -5,9 +5,6 @@
 **Requirements:**  
 Python & PostgreSQL installed  
 
-**DB: postgre**  
-Create postgreDB and don't forget to setup DB options in "settings.py"
-
 **Install instructions:**  
 - Install PostgreSQL  
 - Create and activate a virtual environment:  
